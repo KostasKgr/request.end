@@ -106,8 +106,7 @@ This value represents the time spent in the code itself, excluding external call
 
 ### Beta Version
 
-This specification is currently in beta. Features and conventions are subject to change. We welcome feedback and contributions to help us reach a stable version.
-
+This specification is currently in beta. Features and conventions are subject to change. We welcome feedback in the github discussions, and contributions to help us reach a stable version.
 
 
 ## FAQ
