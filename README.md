@@ -115,13 +115,22 @@ This specification is currently in beta. Features and conventions are subject to
 
 ### Q: If multiple calls are made in a single process, how is the duration calculated?
 
-A: If multiple calls are made in a single process, the duration is the sum of all calls. This approach makes it difficult to calculate percentiles for individual calls.
+If multiple calls are made in a single process, the duration is the sum of all calls. This approach makes it difficult to calculate percentiles for individual calls.
 
 ### Q: How can I handle detailed request information in tools like Kibana?
 
-A: Tools like Kibana lack easy iteration over fields. It is preferable to have a single log line for each request that includes detailed request information, such as status, size, connection time, etc.
+Tools like Kibana lack easy iteration over fields. It is preferable to have a single log line for each request that includes detailed request information, such as status, size, connection time, etc.
 
 ### Q: I don't have any other telemetry tools, can this help me?
 
-A: If you don't have a telemetry stack in place you can still benefit from this approach. Having structured logs means that you can go in your application server and start querying them. For example you could use duckdb to directly load the json logs and start querying them with sql.
+If you don't have a telemetry stack in place you can still benefit from this approach. Having structured logs means that you can go in your application server and start querying them. For example you could use duckdb to directly load the json logs and start querying them with sql.
 
+### Q: Do I need to implement the full example?
+
+No you dont! Start simple and focus in the areas that will give you the most benefits.
+- Begin by using structured logging (the json format) and the basic http and url fields.
+- Start tracking the types/subtypes that are likely to need performance optimizations, or help troubleshoot production issues.
+- Start tracking app/framework specific attributes to be able to filter your data. E.g. a route like `customer/%/history` so that you can drill down into these requests.
+- Track more and more of 3rd party dependencies and introduce the `code.duration`.
+- Add a traceId and include it in other logs of your application so that you can see all the logs of a single request together.
+- Add a spanId and start moving towards open telemetry tracing!
