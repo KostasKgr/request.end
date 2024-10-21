@@ -54,6 +54,28 @@ Particularly useful for legacy applications that do not have access to open sour
 }
 ```
 
+## How do I get started?
+
+You don't need to implement the full example log to start getting value! Start simple and focus in the areas that will give you the most benefits. 
+
+An example order of events might be the following:
+
+- Begin by using structured logging (the json format) and the basic http and url fields.
+- Start tracking the types/subtypes that are likely to need performance optimizations, or help troubleshoot production issues.
+- Start tracking app/framework specific attributes to be able to filter your data. E.g. a route like `customer/%/history` so that you can drill down into these requests.
+- Track more and more of 3rd party dependencies and introduce the `code.duration`.
+- Add a traceId and include it in other logs of your application so that you can see all the logs of a single request together.
+- Add a spanId for the request
+- Start integrating with a distributed tracing system. Using the start and end time of type/subtypes and of the whole request you can do the following.
+    
+    - Send a span for the server request itself
+    - Send spans for each subtype invocation. These will then be appearing in a waterfall diagram under your server request
+    - Combine the `traceId` and the `spanId` of `request.end` and pass them as a `traceparent` header to downstream calls.
+        
+        - If those implement opentelemetry then you can then have distributed tracing!
+        - If they don't, then at least they can log the traceId so that you can follow the logs across all applications for a request.
+
+
 ## Key Features
 
 - Get advanced telemetry for legacy apps with a single log line.
@@ -81,6 +103,8 @@ Particularly useful for legacy applications that do not have access to open sour
         "<type>.total.calls": "value",
         "<type>.total.duration": "value",
 ```
+
+
 
 ## Breakdown of Time Spent
 
@@ -123,12 +147,3 @@ Tools like Kibana lack easy iteration over fields. It is preferable to have a si
 
 If you don't have a telemetry stack in place you can still benefit from this approach. Having structured logs means that you can go in your application server and start querying them. For example you could use duckdb to directly load the json logs and start querying them with sql.
 
-### Q: Do I need to implement the full example?
-
-No you dont! Start simple and focus in the areas that will give you the most benefits.
-- Begin by using structured logging (the json format) and the basic http and url fields.
-- Start tracking the types/subtypes that are likely to need performance optimizations, or help troubleshoot production issues.
-- Start tracking app/framework specific attributes to be able to filter your data. E.g. a route like `customer/%/history` so that you can drill down into these requests.
-- Track more and more of 3rd party dependencies and introduce the `code.duration`.
-- Add a traceId and include it in other logs of your application so that you can see all the logs of a single request together.
-- Add a spanId and start moving towards open telemetry tracing!
