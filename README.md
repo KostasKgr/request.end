@@ -4,7 +4,7 @@ Advanced telemetry from any application with minimal effort!
 
 The Request End Log Spec is a simple approach to obtain advanced telemetry from any application using just a single log line.
 
-Get 90% of the benefits with 10% of the effort! Particularly useful for legacy applications that do not have open instrumentation libraries, providing insights without other telemetry infrastructure.
+Particularly useful for legacy applications that do not have access to open source instrumentation libraries, or for getting insights without other telemetry infrastructure.
 
 ## Example Log Entry
 
