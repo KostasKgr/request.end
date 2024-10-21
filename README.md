@@ -57,15 +57,13 @@ Get 90% of the benefits with 10% of the effort! Particularly useful for legacy a
 ## Key Features
 
 - Get advanced telemetry for legacy apps with a single log line.
-- Monitor which parts of your application consume the most time.
-- Get duration of calls.
+- Monitor which parts of your application consume the most time and drive performance improvements.
 - Monitor suspected improvement areas.
 - Troubleshoot calls to APIs.
 - Compare your traffic today to your traffic yesterday.
-- Enable incremental adoption of telemetry.
-- Easy transition to sending spans instead of logs.
 - Easy composition.
-- Use OpenTelemetry semantic convention names for attributes ([Semantic Conventions for HTTP Metrics](https://opentelemetry.io/docs/specs/semconv/http/http-metrics/)).
+- Easy transition to sending spans for each type/subtype and for the request as a whole.
+- Enable incremental adoption of telemetry.
 
 ## Request End Spec Conventions
 
@@ -74,6 +72,7 @@ Get 90% of the benefits with 10% of the effort! Particularly useful for legacy a
   - Use `_detailed` for processes that happen in parallel, else you will get incorrect calculations for the `code.duration` field.
 - Avoid dynamic fields with high cardinality to prevent issues with telemetry systems (e.g., ElasticSearch has a 1k max fields soft-limit).
 - All durations are recorded in seconds.
+- Use OpenTelemetry semantic convention names for attributes ([Semantic Conventions for HTTP Metrics](https://opentelemetry.io/docs/specs/semconv/http/http-metrics/)).
 - The convention for calls and duration is as follows:
 
 ```
