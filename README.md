@@ -1,6 +1,6 @@
 # request.end
 
-Advanced telemetry from any application with minimal effort!
+Advanced telemetry for legacy applications made simple!
 
 The Request End Log Spec is a simple approach to obtain advanced telemetry from any application using just a single log line.
 
